@@ -18,3 +18,11 @@ def luke(a, b=None):
 def user(a, b=None):
     print(a)
     return input("What is your response?: ")
+
+#if a in exciting_things:
+  #      return "YESS! Time for {}".format(action)
+  #  elif action in boring_things:
+ #       return "What? {} sucks. Not doing that.".format(action)
+#    return "I don't care!"
+
+#
