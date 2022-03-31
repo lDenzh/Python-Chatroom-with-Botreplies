@@ -15,7 +15,7 @@ def luke(a, b=None):
 def obiwan(a, b=None):
     alternatives = ["reading", "talking", "sleeping", "fighting", "playing", "training"]
     b = random.choice(alternatives)
-    response = f"Obi-Wan > Yes, {a} is an option. Or we could do some {b}."
+    response = f"Obi-Wan > Yes, {a}ing is an option. Or we could do some {b}."
     return response
 
 def vader(a, b=None):
