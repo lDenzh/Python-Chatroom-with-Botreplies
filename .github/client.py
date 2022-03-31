@@ -19,8 +19,16 @@ username = my_username.encode(FORMAT)
 username_header = f"{len(username):<{HEADER}}".encode(FORMAT)
 client.send(username_header + username)
 
+
+print("You are connected, press q and hit enter to quit")
+
 while True:
     message = input(f"{my_username} > ")
+
+    if message == "q":
+        print("Closing connection with server")
+        client.close()
+        break
 
     if message:
         message = message.encode(FORMAT)
