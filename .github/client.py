@@ -12,7 +12,7 @@ ADDR = (IP, PORT)
 my_username = input("Username: ")
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(ADDR)
+client.connect((ADDR))
 client.setblocking(False)  # Receive functionality won't be blocking
 
 username = my_username.encode(FORMAT)

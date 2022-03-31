@@ -3,26 +3,28 @@ import random
 
 # Bot functions
 
-def anakin(a, b=None):
-    return "I think {} sounds intriguing".format(a + "ing")
+def yoda(a, b=None):
+    return "Yoda > {} we must".format(a + "ing")
 
 
 def luke(a, b=None):
     if b is None:
-        return "Not sure about {}. Don't I get a choice?".format(a + "ing")
-    return "Sure, both {} and {} seems ok to me".format(a, b + "ing")
+        return "Luke > Not sure about {}. Don't I get a choice?".format(a + "ing")
+    return "Luke > Sure, both {} and {} seems ok to me".format(a, b + "ing")
 
+def obiwan(a, b=None):
+    alternatives = ["reading", "talking", "sleeping", "fighting", "playing", "training"]
+    b = random.choice(alternatives)
+    response = f"Obi-Wan > Yes, {a} is an option. Or we could do some {b}."
+    return response
 
-# A user function that allows communication with the bots
+def vader(a, b=None):
+    action = a + "ing"
+    bad_things = ["fighting", "killing", "choking", "conquering"]
+    nice_things = ["cooking", "sleeping", "cuddling", "killing", "working", "flying", "reading", "playing"]
 
-def user(a, b=None):
-    print(a)
-    return input("What is your response?: ")
-
-#if a in exciting_things:
-  #      return "YESS! Time for {}".format(action)
-  #  elif action in boring_things:
- #       return "What? {} sucks. Not doing that.".format(action)
-#    return "I don't care!"
-
-#
+    if action in bad_things:
+        return "Darth Vader > Yes! Time for {}!".format(action)
+    elif action in nice_things:
+        return "Darth Vader > What? {} is a waste of time!".format(action)
+    return "Darth Vader > It doesn't interest me at all"

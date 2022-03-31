@@ -1,6 +1,7 @@
 import select
 import socket
 import response
+import re
 
 HEADER = 64
 PORT = 5050
@@ -61,13 +62,32 @@ while True:
                 del clients[notified_socket]
                 continue
 
-            user = clients[notified_socket]
+            msg = message['data'].decode(FORMAT)
+            username = user['data'].decode(FORMAT)
 
-            print(f"Received message from {user['data'].decode(FORMAT)}: {message['data'].decode(FORMAT)}")
+            print(f"Received message from {username}: {msg}")
+
+            actions = [w for w in msg.split() if w.endswith('?')]
+            # Makes a list of the verbs in the message.
+
+            a = [s.replace("?", "") for s in actions]
+            # Removes the questionmark from the verb
+
+            user = clients[notified_socket]
 
             for client_socket in clients:
                 if client_socket != notified_socket:
                     client_socket.send(user['header'] + user['data'] + message['header'] + message['data'])
+                if a:
+                    yodaresponse = response.yoda(a[0])
+                    lukeresponse = response.luke(a[0])
+                    obiwanresponse = response.obiwan(a[0])
+                    vaderresponse = response.vader(a[0])
+                    print(yodaresponse)
+                    print(lukeresponse)
+                    print(obiwanresponse)
+                    print(vaderresponse)
+                    #client_socket.sendall(b"yodaresponse")
 
     for notified_socket in exception_sockets:
         sockets_list.remove(notified_socket)
