@@ -4,28 +4,29 @@ import response
 
 HEADER = 64
 PORT = 5050
-IP = socket.gethostbyname(socket.gethostname()) #Grabs the hosts local IP address
+IP = socket.gethostbyname(socket.gethostname())  # Grabs the hosts local IP address
 ADDR = (IP, PORT)
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) #This allows us to reconnect
+server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)  # This allows us to reconnect
 
 server.bind(ADDR)
-#test
+# test
 server.listen()
 
 sockets_list = [server]
 
 clients = {}
 
+
 def receive_message(client_socket):
     try:
         message_header = client_socket.recv(HEADER)
 
         if not len(message_header):
-            return false
+            return False
 
         message_length = int(message_header.decode(FORMAT).strip())
         return {"header": message_header, "data": client_socket.recv(message_length)}
@@ -48,7 +49,8 @@ while True:
 
             clients[client] = user
 
-            print(f"Accepted new connection from {client_address[0]}:{client_address[1]} username: {user['data'].decode(FORMAT)}")
+            print(
+                f"Accepted new connection from {client_address[0]}:{client_address[1]} username: {user['data'].decode(FORMAT)}")
 
         else:
             message = receive_message(notified_socket)
