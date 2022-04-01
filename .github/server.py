@@ -69,7 +69,7 @@ while True:
             # Makes a list of a word that ends with ?.
 
             a = [s.replace("?", "") for s in actions]
-            # Removes the questionmark from the verb
+            # Removes the question mark from the verb
 
             user = clients[notified_socket]
 
