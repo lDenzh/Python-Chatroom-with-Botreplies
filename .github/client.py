@@ -14,7 +14,7 @@ ADDR = (IP, PORT)
 my_username = input("Username: ")
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect((ADDR))
+client.connect(ADDR)
 client.setblocking(False)  # Receive functionality won't be blocking
 
 username = my_username.encode(FORMAT)
@@ -57,7 +57,6 @@ while True:
             message = client.recv(message_length).decode(FORMAT)
 
             print(f"{username} > {message}")
-
 
     except IOError as e:
         if e.errno != errno.EAGAIN and e.errno != errno.EWOULDBLOCK:
