@@ -1,6 +1,5 @@
 import random
 
-
 # Bot functions
 
 def yoda(a, b=None):

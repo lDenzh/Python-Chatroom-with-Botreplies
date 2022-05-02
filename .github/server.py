@@ -20,6 +20,12 @@ clients = {}
 
 
 def receive_message(client):
+    """
+    It receives a message from the client, decodes the header, and returns the header and the data
+
+    :param client: The socket object of the client that sent the message
+    :return: A dictionary with the header and data of the message.
+    """
     try:
         message_header = client.recv(HEADER)
 
@@ -32,6 +38,7 @@ def receive_message(client):
         return False
 
 
+# This is the main loop of the program. It is constantly checking for new connections and messages.
 while True:
     read_sockets, _, exception_sockets = select.select(sockets_list, [], sockets_list)
 
@@ -66,12 +73,13 @@ while True:
             print(f"Received message from {username}: {msg}")
 
             actions = [w for w in msg.split() if w.endswith('?')]
-            # Makes a list of a word that ends with ?.
+            # Makes a list of words that ends with ?.
 
             a = [s.replace("?", "") for s in actions]
-            # Removes the question mark from the verb
+            # Removes the question mark from the word/verb
 
             user = clients[notified_socket]
+
 
             for client_socket in clients:
                 if client_socket != notified_socket:
@@ -92,6 +100,7 @@ while True:
                     botresponse = [yodaresponse, lukeresponse, obiwanresponse, vaderresponse]
                     #  Defining the bots responses
 
+                    # Sending the bot responses to all clients.
                     for responses, botname in zip(botresponse, bots):
                         botprint = botname + ": " + responses
                         print(botprint)  # Printing on server side,
@@ -103,8 +112,9 @@ while True:
                         botmessage = responses.encode(FORMAT)
 
                         client_socket.send(botheader + botdata + messageheader + botmessage)
-                        #  Sending botresponses to all clients
 
+
+    # This is a loop that removes the socket from the list of sockets and deletes the client.
     for notified_socket in exception_sockets:
         sockets_list.remove(notified_socket)
         del clients
